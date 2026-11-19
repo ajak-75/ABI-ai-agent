@@ -21,7 +21,7 @@ import {
 } from '../../router/types';
 import type { RouteMode } from '../../router/types';
 import {
-  clearAllData,
+  clearConversations,
   countMemories,
   countMessages,
   countSessions,
@@ -140,10 +140,10 @@ export function SettingsScreen() {
         text: '지우기',
         style: 'destructive',
         onPress: async () => {
-          await clearAllData();
-          await recordAudit('data.cleared', '대화·기억·작업 전체 삭제');
+          await clearConversations();
+          await recordAudit('data.conversations_cleared', '세션·메시지 전체 삭제');
           bumpDataVersion();
-          setNotice('로컬 데이터를 모두 지웠습니다.');
+          setNotice('대화 기록을 모두 지웠습니다. 기억과 작업 기록은 남아 있습니다.');
           await refresh();
         },
       },

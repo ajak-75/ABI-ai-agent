@@ -79,7 +79,7 @@ app_settings(key PK, value, updated_at)
 
 ## 감사 로그에 남는 실제 이벤트
 
-`app.started`, `chat.message.sent`, `router.decision`, `router.reply`, `memory.created`, `memory.deleted`, `session.deleted`, `task.created`, `approval.approved`, `approval.rejected`, `settings.route_mode`, `settings.api_key_saved`, `settings.api_key_deleted`, `data.cleared`
+`app.started`, `chat.message.sent`, `router.decision`, `router.reply`, `memory.created`, `memory.deleted`, `session.deleted`, `task.created`, `approval.approved`, `approval.rejected`, `settings.route_mode`, `settings.api_key_saved`, `settings.api_key_deleted`, `data.conversations_cleared`
 
 로그 쓰기는 실패해도 사용자 동작을 막지 않습니다(`recordAudit` 내부 try/catch).
 

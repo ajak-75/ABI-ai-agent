@@ -3,7 +3,7 @@
  * All data stays on the device (expo-sqlite); nothing is uploaded.
  */
 
-export { getDatabase, initDatabase, clearAllData, resetDatabase } from './database';
+export { getDatabase, initDatabase, clearConversations, clearAllData, resetDatabase } from './database';
 export { DATABASE_NAME, SCHEMA_VERSION } from './schema';
 
 export * from './types';

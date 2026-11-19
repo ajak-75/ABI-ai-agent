@@ -70,7 +70,16 @@ async function migrate(db: SQLite.SQLiteDatabase): Promise<void> {
   }
 }
 
-/** Wipes every row while keeping the schema (used by the settings screen). */
+/** Deletes every conversation (sessions + messages) but keeps memories, tasks and settings. */
+export async function clearConversations(): Promise<void> {
+  const db = await getDatabase();
+  await db.withTransactionAsync(async () => {
+    await db.execAsync('DELETE FROM messages;');
+    await db.execAsync('DELETE FROM sessions;');
+  });
+}
+
+/** Wipes every user row while keeping the schema (used by the settings screen). */
 export async function clearAllData(): Promise<void> {
   const db = await getDatabase();
   await db.withTransactionAsync(async () => {
@@ -84,8 +93,16 @@ export async function clearAllData(): Promise<void> {
 
 /** Deletes the whole database file; the next read recreates it from scratch. */
 export async function resetDatabase(): Promise<void> {
-  const db = await getDatabase();
-  await db.execAsync('PRAGMA journal_mode = DELETE;');
+  const db = await getDatabase().catch(() => null);
+  if (db) {
+    try {
+      await db.closeAsync();
+    } catch {
+      // Already closed.
+    }
+  }
   databasePromise = null;
-  await SQLite.deleteDatabaseAsync(DATABASE_NAME);
+  await SQLite.deleteDatabaseAsync(DATABASE_NAME).catch(() => undefined);
+  // Re-create immediately so screens can keep querying without a race.
+  await getDatabase();
 }
