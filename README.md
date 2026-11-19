@@ -72,7 +72,9 @@ src/
   tools/                    도구 계약 · 빈 레지스트리
   security/                 SecureStore 비밀 · 승인 정책
   theme/                    색·간격·타이포 토큰
-docs/                       설계 문서 7종
+docs/                       설계 문서 7종 + 검증 기록 + CI 안내
+scripts/                    오프라인 테스트 (npm test)
+ci/                         GitHub Actions 워크플로우 원본(.github/workflows에 추가해 활성화)
 ```
 
 ## 문서
