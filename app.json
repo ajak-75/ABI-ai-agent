@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Ajak AI Agent",
+    "slug": "android-ai-agent",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "ajakagent",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ajak75.androidaiagent"
+    },
+    "android": {
+      "package": "com.ajak75.androidaiagent",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-sqlite",
+      "expo-secure-store",
+      "expo-splash-screen",
+      "expo-dev-client",
+      "expo-font"
+    ],
+    "extra": {
+      "phase": 1,
+      "buildProfile": "development"
+    }
+  }
+}
