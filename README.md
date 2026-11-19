@@ -1,5 +1,14 @@
 # Android AI Agent — PHASE 1
 
+### 테스트 APK 상태
+
+| APK | 상태 | 실행 조건 |
+| --- | --- | --- |
+| standalone (release, debug 키 서명) | CI 워크플로우 준비됨(사용자가 `.github/workflows/`에 추가해야 실행) | 폰 단독 실행 |
+| dev client (debug) | 동일 | PC에서 `npm start` 필요 |
+
+워크플로우는 `ci/android-debug-apk.yml`에 있고, GitHub 앱의 `workflows` 권한 제한으로 자동 푸시되지 않았습니다. [활성화 방법](docs/CI_ANDROID_APK.md)
+
 진아 님의 Android AI 앱 1단계입니다. **기존 프로젝트(`diary`, `KOMI-Diary`, `ajak-studio`, `danjjan-smartstore-prep`)와 완전히 분리된 독립 저장소**이며, 공개 오픈소스 기술만 사용합니다.
 
 - Expo SDK 58 · React Native 0.88 · TypeScript 6 (strict)
@@ -76,6 +85,7 @@ docs/                       설계 문서 7종
 - [COST_ESTIMATE](docs/COST_ESTIMATE.md)
 - [MOBILE_COMPATIBILITY](docs/MOBILE_COMPATIBILITY.md)
 - [VERIFICATION](docs/VERIFICATION.md) — 이번 1단계에서 실제로 돌린 검증과 결과
+- [CI_ANDROID_APK](docs/CI_ANDROID_APK.md) — GitHub Actions로 무료 APK 만들기(워크플로우 활성화 방법 포함)
 
 ## 라이선스
 

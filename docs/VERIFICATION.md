@@ -14,6 +14,7 @@
 | 5 | `npx expo export --platform android` | **통과** — Hermes 번들 `index-*.hbc` 2.6MB 생성(모듈 해석 오류 없음) |
 | 6 | `./gradlew --version` (android/) | **실패** — `ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.` |
 | 7 | `npm test` (scripts/run-tests.sh) | **통과** — SQL 스키마·쿼리 검증 + 논리 테스트 6건 |
+| 8 | `git push` + `.github/workflows/android-debug-apk.yml` | **거부** — `refusing to allow a GitHub App to create or update workflow ... without workflows permission`. 워크플로우 파일은 `ci/android-debug-apk.yml`로 저장(우회하지 않음) |
 
 ### 3번(doctor)에서 발견한 오류와 수정
 

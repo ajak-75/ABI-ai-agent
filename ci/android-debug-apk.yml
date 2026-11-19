@@ -1,0 +1,96 @@
+name: Android APK (debug + standalone)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'App.tsx'
+      - 'index.ts'
+      - 'src/**'
+      - 'assets/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'app.json'
+      - 'tsconfig.json'
+      - 'eas.json'
+      - '.github/workflows/android-debug-apk.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-apk:
+    name: Build APKs (JDK 17 + Android SDK)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Generate native Android project
+        run: npx expo prebuild --platform android --no-install
+
+      - name: Build debug APK (dev client, needs Metro)
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon --stacktrace assembleDebug \
+            -PreactNativeArchitectures=arm64-v8a
+
+      - name: Build standalone APK (bundled JS, no Metro needed)
+        working-directory: android
+        run: |
+          ./gradlew --no-daemon --stacktrace assembleRelease \
+            -PreactNativeArchitectures=arm64-v8a
+
+      - name: Collect APKs
+        run: |
+          mkdir -p artifacts
+          cp android/app/build/outputs/apk/debug/app-debug.apk \
+             artifacts/abi-ai-agent-phase1-debug-devclient.apk
+          cp android/app/build/outputs/apk/release/app-release.apk \
+             artifacts/abi-ai-agent-phase1-standalone.apk
+          ls -lh artifacts
+
+      - name: Upload debug APK (development build)
+        uses: actions/upload-artifact@v4
+        with:
+          name: abi-ai-agent-phase1-debug-devclient
+          path: artifacts/abi-ai-agent-phase1-debug-devclient.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload standalone APK (install and run without PC)
+        uses: actions/upload-artifact@v4
+        with:
+          name: abi-ai-agent-phase1-standalone
+          path: artifacts/abi-ai-agent-phase1-standalone.apk
+          if-no-files-found: error
+          retention-days: 30
