@@ -1,4 +1,4 @@
-# Android AI Agent — PHASE 1
+# ABI (Android AI Agent) — PHASE 1
 
 ### 테스트 APK 상태
 

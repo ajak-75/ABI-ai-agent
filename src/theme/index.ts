@@ -1,5 +1,5 @@
 /**
- * Ajak AI Agent — app theme tokens.
+ * ABI — app theme tokens.
  * Single source of truth for colors, spacing, radius and typography.
  */
 

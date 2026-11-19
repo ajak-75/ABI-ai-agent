@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Ajak AI Agent",
+    "name": "ABI",
     "slug": "android-ai-agent",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,9 +15,8 @@
       "package": "com.ajak75.androidaiagent",
       "versionCode": 1,
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#F3F0EB",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false
@@ -28,7 +27,15 @@
     "plugins": [
       "expo-sqlite",
       "expo-secure-store",
-      "expo-splash-screen",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#F3F0EB"
+        }
+      ],
       "expo-dev-client",
       "expo-font"
     ],

@@ -309,7 +309,7 @@ export function SettingsScreen() {
 
           <SectionHeader title="앱 정보" />
           <Card style={styles.infoCard}>
-            <InfoRow label="앱 이름" value={Constants.expoConfig?.name ?? 'Ajak AI Agent'} />
+            <InfoRow label="앱 이름" value={Constants.expoConfig?.name ?? 'ABI'} />
             <InfoRow label="버전" value={`${version} · PHASE ${phase}`} />
             <InfoRow label="빌드" value="Development Build (expo-dev-client)" />
             <InfoRow label="데이터 저장" value="SQLite · 기기 로컬" />
